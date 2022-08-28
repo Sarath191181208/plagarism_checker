@@ -1,5 +1,7 @@
 # self
 dist/
+data/
+plag_check_venv/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
