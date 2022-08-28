@@ -3,32 +3,65 @@
 
 <head>
     <meta charset="utf-8">
-    <title>sample</title>
-    <link href="style.css" rel="stylesheet">
-    <script type="text/javascript" src="/eel.js"></script>
-    <script src="./documentHelpers.js"></script>
-    <script type="text/javascript" src="main.js"></script>
+    <title>AAnalyze</title>
+
+    <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/aos/aos.css">
+
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="plugins/aos/aos.js"></script>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/shapes-container.css">
+    <link rel="stylesheet" href="./css/table.css">
+    <link rel="stylesheet" href="./css/banner.css">
+    <link rel="stylesheet" href="./css/button.css">
+
+    <script defer type="text/javascript" src="/eel.js"></script>
+    <script defer src="./documentHelpers.js"></script>
+    <script defer type="text/javascript" src="main.js"></script>
 </head>
 
 <body>
-    <!--
-have to call compute() from here for example when user clicks any button or something like that.
--->
-    <button onclick="compute();">Testing .... </button>
 
-    <!-- /balaji -->
-    <form name="folderUploadForm" onclick="uploadFolderPath();return false">
-        Select Folder to Upload: <input type="file" name="folder_path" id="files" multiple directory=""
-            webkitdirectory="" moxdirectory="" />
-        <!-- file type selector .txt, .pdf -->
-        <input type="file" accept=".txt" ,".pdf">
-        <button type="submit">Submit</button>
-        <!-- uploadFolderPath(folder_path, extension):function name -->
-    </form>
-    <!-- /balaji -->
+    <section class="section gradient-banner">
+        <div class="shapes-container">
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="1500" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-up-right" data-aos-duration="1000" data-aos-delay="200"></div>
+            <div class="shape" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"></div>
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="1000" data-aos-delay="100"></div>
+            <div class="shape" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300"></div>
+            <div class="shape" data-aos="fade-down-right" data-aos-duration="500" data-aos-delay="200"></div>
+            <div class="shape" data-aos="fade-down-right" data-aos-duration="500" data-aos-delay="100"></div>
+            <div class="shape" data-aos="zoom-out" data-aos-duration="2000" data-aos-delay="500"></div>
+            <div class="shape" data-aos="fade-up-right" data-aos-duration="500" data-aos-delay="200"></div>
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-up" data-aos-duration="500" data-aos-delay="0"></div>
+            <div class="shape" data-aos="fade-down" data-aos-duration="500" data-aos-delay="0"></div>
+            <div class="shape" data-aos="fade-up-right" data-aos-duration="500" data-aos-delay="100"></div>
+            <div class="shape" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="0"></div>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-2 order-md-1 text-center text-md-left">
+                    <h1 class="text-white font-weight-bold mb-4">Analyze Assignments using AAnalyze</h1>
+                    <p class="text-white mb-5">AAnalyze provides you with the ability to process text like no other.
+                        Check your students Assignments in the blink of an eye.</p>
+                    <button onclick="test();" class="btn btn-main-md">Upload Folder</button>
+                </div>
+                <div class="col-md-6 text-center order-1 order-md-2">
+                    <img class="img-fluid" src="images/mobile.png" alt="screenshot">
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="center">
+        <table id="student-match-score-table" class="styled-table"></table>
+    </div>
 
-    <table id="student-match-score-table" class="styled-table">
-    </table>
 </body>
 
 </html>
