@@ -1,14 +1,17 @@
-function uploadFolderPath(folderPath) {
+AOS.init();
 
-}
-function compute() {
-    abs_folder_path = "E:/Sarath/python/Plagarism_cheker/data"
-    e = '.txt'
-    eel.uploadFolder(abs_folder_path, e)(setValue)
+function test() {
+    alert("Choose a file in the selection menu to select the entire folder.")
+    eel.selectFolder()(absPath => { eel.uploadFolder(absPath)(updateScores) });
 }
 
-function setValue(res) {
+function updateScores(res) {
+    if (res === null) {
+        alert("No valid data found In the given folder !")
+    }
+
     let stuTable = document.getElementById("student-match-score-table");
+    stuTable.innerHTML = "";
     let h = tableHeader("File Name", "File Name", "Match Score");
     stuTable.appendChild(h);
 
@@ -25,5 +28,7 @@ function setValue(res) {
     });
 
     stuTable.appendChild(tableBody);
-
+    stuTable.scrollIntoView({
+        behavior: 'smooth'
+    });
 }
