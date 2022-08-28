@@ -2,12 +2,28 @@ function uploadFolderPath(folderPath) {
 
 }
 function compute() {
-    console.log("compute")
-    var data = 56;
-    el.demo(data)(setValue)
+    abs_folder_path = "E:/Sarath/python/Plagarism_cheker/data"
+    e = '.txt'
+    eel.uploadFolder(abs_folder_path, e)(setValue)
 }
 
 function setValue(res) {
-    console.log("res", res);
-    document.getElementById("abc").innerHTML = res
+    let stuTable = document.getElementById("student-match-score-table");
+    let h = tableHeader("File Name", "File Name", "Match Score");
+    stuTable.appendChild(h);
+
+    let tableBody = document.createElement('tbody');
+    res.forEach(ele => {
+        const [fileName1, fileName2, matchScore] = ele;
+        tableBody.appendChild(
+            tr(
+                td(fileName1),
+                td(fileName2),
+                td(matchScore)
+            )
+        );
+    });
+
+    stuTable.appendChild(tableBody);
+
 }
