@@ -6,6 +6,7 @@
     <title>sample</title>
     <link href="style.css" rel="stylesheet">
     <script type="text/javascript" src="/eel.js"></script>
+    <script src="./documentHelpers.js"></script>
     <script type="text/javascript" src="main.js"></script>
 </head>
 
@@ -13,14 +14,21 @@
     <!--
 have to call compute() from here for example when user clicks any button or something like that.
 -->
-    <form action="">
-        <input id="design" type="file" webkitdirectory="true" directory />
-        <a href="">click on the folder</a>
-        <!-- file type : pdf, txt -->
+    <button onclick="compute();">Testing .... </button>
+
+    <!-- /balaji -->
+    <form name="folderUploadForm" onclick="uploadFolderPath();return false">
+        Select Folder to Upload: <input type="file" name="folder_path" id="files" multiple directory=""
+            webkitdirectory="" moxdirectory="" />
+        <!-- file type selector .txt, .pdf -->
+        <input type="file" accept=".txt" ,".pdf">
         <button type="submit">Submit</button>
-        <!-- on submit -->
         <!-- uploadFolderPath(folder_path, extension):function name -->
     </form>
+    <!-- /balaji -->
+
+    <table id="student-match-score-table" class="styled-table">
+    </table>
 </body>
 
 </html>
