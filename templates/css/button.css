@@ -2,8 +2,8 @@
   padding: 17px 38px;
   border-radius: 8px;
   background: #fff;
-  color: #2e7eed;
-  border-color: #2e7eed;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
   outline: none;
   transition: 0.5s;
   font-weight: bold !important;
@@ -11,7 +11,7 @@
 
 .btn-main-md:hover {
   color: #fff;
-  background: #2e7eed;
+  background: var(--primary-color);
 }
 
 .btn-main-md:focus {
