@@ -6,8 +6,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from typing import  Callable, Union
 
+import sys
 from .parsers import TxtParser
-
+from .parsers import PdfParser
 
 def get_file_parser(extension: str) -> Callable[ str, str]:
     """returns a function to read a file the function takes the absolute path of a file and returns text"""
@@ -15,6 +16,8 @@ def get_file_parser(extension: str) -> Callable[ str, str]:
     fn: callable
     if extension == "txt":
         fn = TxtParser().parse
+    elif extension == "pdf":
+        fn = PdfParser().parse
     else:
         raise Exception("The current given extension doesn't have the neccesary parser implemented")
     return fn
@@ -62,7 +65,7 @@ def check_plagiarism_in_folder(abs_folder_path: str) -> list[str, str, float]:
     return plagiarism_results
 
 if __name__ == "__main__":
-    abs_folder_path = "E:\Sarath\python\Plagarism_cheker\data"
+    abs_folder_path = "E:\Sarath\python\Plagarism_cheker\data/pdf"
     # try: 
     for data in check_plagiarism_in_folder(abs_folder_path):
         print("data", data)
