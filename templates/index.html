@@ -17,10 +17,15 @@
     <link rel="stylesheet" href="./css/table.css">
     <link rel="stylesheet" href="./css/banner.css">
     <link rel="stylesheet" href="./css/button.css">
+    <link rel="stylesheet" href="./css/loading.css">
+    <link rel="stylesheet" href="./css/to-top-button.css">
+
+
 
     <script defer type="text/javascript" src="/eel.js"></script>
-    <script defer src="./documentHelpers.js"></script>
-    <script defer type="text/javascript" src="main.js"></script>
+    <script defer src="./js/scroll.js"></script>
+    <script defer src="./js/documentHelpers.js"></script>
+    <script defer type="text/javascript" src="./js/main.js"></script>
 </head>
 
 <body>
@@ -58,9 +63,25 @@
             </div>
         </div>
     </section>
+
+    <div id="loading-container" class="loading-center close">
+        <div class="loading-wave"></div>
+        <div class="loading-wave"></div>
+        <div class="loading-wave"></div>
+        <div class="loading-wave"></div>
+        <div class="loading-wave"></div>
+        <div class="loading-wave"></div>
+        <div class="loading-wave"></div>
+        <div class="loading-wave"></div>
+        <div class="loading-wave"></div>
+        <div class="loading-wave"></div>
+    </div>
+
     <div class="center">
         <table id="student-match-score-table" class="styled-table"></table>
     </div>
+
+    <button onclick="toTopFn()" id="scroll-to-top-btn" title="Go to top">&uarr;</button>
 
 </body>
 
