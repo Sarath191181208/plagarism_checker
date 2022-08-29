@@ -12,7 +12,6 @@ logging.basicConfig(filename='logs.log',
     format='%(asctime)s %(message)s', 
     datefmt='%m/%d/%Y %I:%M:%S %p')
 
-# name of folder where the html, css, js, image files are located
 eel.init('templates')
 
 @eel.expose
