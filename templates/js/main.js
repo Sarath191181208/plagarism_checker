@@ -2,10 +2,12 @@ AOS.init();
 
 function test() {
     alert("Choose a file in the selection menu to select the entire folder.")
+    $("#loading-container").addClass("show");
     eel.selectFolder()(absPath => { eel.uploadFolder(absPath)(updateScores) });
 }
 
 function updateScores(res) {
+
     if (res === null) {
         alert("No valid data found In the given folder !")
     }
@@ -26,6 +28,8 @@ function updateScores(res) {
             )
         );
     });
+
+    $("#loading-container").removeClass("show");
 
     stuTable.appendChild(tableBody);
     stuTable.scrollIntoView({
