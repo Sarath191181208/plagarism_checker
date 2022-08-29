@@ -1,0 +1,101 @@
+{
+ "version": "auto-py-to-exe-configuration_v1",
+ "pyinstallerOptions": [
+  {
+   "optionDest": "noconfirm",
+   "value": true
+  },
+  {
+   "optionDest": "filenames",
+   "value": "E:/Sarath/python/Plagarism_cheker/main.py"
+  },
+  {
+   "optionDest": "onefile",
+   "value": false
+  },
+  {
+   "optionDest": "console",
+   "value": true
+  },
+  {
+   "optionDest": "ascii",
+   "value": false
+  },
+  {
+   "optionDest": "clean_build",
+   "value": false
+  },
+  {
+   "optionDest": "strip",
+   "value": false
+  },
+  {
+   "optionDest": "noupx",
+   "value": false
+  },
+  {
+   "optionDest": "disable_windowed_traceback",
+   "value": false
+  },
+  {
+   "optionDest": "embed_manifest",
+   "value": true
+  },
+  {
+   "optionDest": "uac_admin",
+   "value": false
+  },
+  {
+   "optionDest": "uac_uiaccess",
+   "value": false
+  },
+  {
+   "optionDest": "win_private_assemblies",
+   "value": false
+  },
+  {
+   "optionDest": "win_no_prefer_redirects",
+   "value": false
+  },
+  {
+   "optionDest": "bootloader_ignore_signals",
+   "value": false
+  },
+  {
+   "optionDest": "argv_emulation",
+   "value": false
+  },
+  {
+   "optionDest": "datas",
+   "value": "E:/Sarath/python/Plagarism_cheker/src;src/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "E:/Sarath/python/Plagarism_cheker/templates;templates/"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "scikit-learn"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "eel"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "textract"
+  },
+  {
+   "optionDest": "pathex",
+   "value": "E:/Sarath/python/Plagarism_cheker/venv/Lib/site-packages/scipy/.libs"
+  },
+  {
+   "optionDest": "pathex",
+   "value": "E:/Sarath/python/Plagarism_cheker/venv/Lib/site-packages"
+  }
+ ],
+ "nonPyinstallerOptions": {
+  "increaseRecursionLimit": true,
+  "manualArguments": ""
+ }
+}
