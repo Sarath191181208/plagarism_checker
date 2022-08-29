@@ -9,6 +9,8 @@ from typing import  Callable, Union
 from .parsers import TxtParser
 from .parsers import PdfParser
 
+import logging
+
 def get_file_parser(extension: str) -> Callable[ str, str]:
     """returns a function to read a file the function takes the absolute path of a file and returns text"""
     extension = extension.removeprefix('.')
@@ -18,7 +20,9 @@ def get_file_parser(extension: str) -> Callable[ str, str]:
     elif extension == "pdf":
         fn = PdfParser().parse
     else:
-        raise Exception("The current given extension doesn't have the neccesary parser implemented")
+        msg = f"The current given {extension= } doesn't have the neccesary parser implemented"
+        logging.exception(msg)
+        raise Exception(msg)
     return fn
 
 def vectorize(txt: str)-> np.ndarray: return TfidfVectorizer().fit_transform(txt).toarray() # text to vectors
@@ -32,20 +36,21 @@ def check_plagiarism_in_folder(abs_folder_path: str) -> list[str, str, float]:
             return get_file_parser(ext)(abs_file_path)
         except:
             traceback.print_exc()
+            logging.exception(f"Parsing the file failded {abs_file_path= }")
             return None
 
     user_files = [doc for doc in os.listdir(abs_folder_path) if not os.path.isdir(doc)]      # getting all the files 
     
-    print("user_files", user_files)
-    print([os.path.join(abs_folder_path, file_name) for file_name in user_files])
+    logging.debug(f"{user_files= }")
+    logging.debug([os.path.join(abs_folder_path, file_name) for file_name in user_files])
 
     user_notes = {file_name : _generate_parser_and_read(os.path.join(abs_folder_path, file_name).replace("\\", "/")) 
                 for file_name in user_files} # parsing all the files
     user_notes = {k:v for k,v in user_notes.items() if v} # i.e v is truthy (not (None or empty))
     user_files, user_notes = zip(*user_notes.items())
-    
-    print("abs_folder_path", abs_folder_path)
-    print("user_notes", user_notes)
+
+    logging.debug(f"{abs_folder_path= }")
+    logging.debug(f"turnicated user_notes = {[note[:20] for note in user_notes]}")
 
     txt_vectors = vectorize(user_notes) # list[str] -> vectors
     s_vectors = list(zip(user_files, txt_vectors)) # merging filenames and vectors
