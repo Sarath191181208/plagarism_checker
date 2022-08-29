@@ -6,7 +6,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from typing import  Callable, Union
 
-import sys
 from .parsers import TxtParser
 from .parsers import PdfParser
 
