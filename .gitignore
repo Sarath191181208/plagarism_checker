@@ -1,5 +1,6 @@
 # self
 dist/
+output/
 data/
 plag_check_venv/
 
