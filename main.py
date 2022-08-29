@@ -1,6 +1,5 @@
 import os
 import tkinter
-from tkinter import messagebox 
 import tkinter.filedialog as filedialog
 import traceback
 import eel

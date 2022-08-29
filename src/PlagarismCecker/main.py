@@ -1,25 +1,20 @@
 import os
+import traceback
 import numpy as np
 from pathlib import Path
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from typing import  Callable, Union
-import textract
 
+from .parsers import TxtParser
 
-textract_supported_files = [
-"csv" ,"doc" ,"docx","eml" ,"epub" ,
-"gif" ,"jpg" ,"json","html","mp3"  ,"msg" ,
-"odt" ,"ogg" ,"pdf" ,"png" ,"pptx" ,"ps" ,
-"rtf" ,"tiff","txt" ,"wav" ,"xlsx" ,"xls" ,
-]
 
 def get_file_parser(extension: str) -> Callable[ str, str]:
     """returns a function to read a file the function takes the absolute path of a file and returns text"""
     extension = extension.removeprefix('.')
     fn: callable
-    if extension in textract_supported_files:
-        fn = textract.process
+    if extension == "txt":
+        fn = TxtParser().parse
     else:
         raise Exception("The current given extension doesn't have the neccesary parser implemented")
     return fn
@@ -34,12 +29,21 @@ def check_plagiarism_in_folder(abs_folder_path: str) -> list[str, str, float]:
         try: 
             return get_file_parser(ext)(abs_file_path)
         except:
+            traceback.print_exc()
             return None
 
     user_files = [doc for doc in os.listdir(abs_folder_path) if not os.path.isdir(doc)]      # getting all the files 
-    user_notes = {file_name : _generate_parser_and_read(os.path.join(abs_folder_path, file_name)) 
+    
+    print("user_files", user_files)
+    print([os.path.join(abs_folder_path, file_name) for file_name in user_files])
+
+    user_notes = {file_name : _generate_parser_and_read(os.path.join(abs_folder_path, file_name).replace("\\", "/")) 
                 for file_name in user_files} # parsing all the files
+    user_notes = {k:v for k,v in user_notes.items() if v} # i.e v is truthy (not (None or empty))
     user_files, user_notes = zip(*user_notes.items())
+    
+    print("abs_folder_path", abs_folder_path)
+    print("user_notes", user_notes)
 
     txt_vectors = vectorize(user_notes) # list[str] -> vectors
     s_vectors = list(zip(user_files, txt_vectors)) # merging filenames and vectors
@@ -58,9 +62,9 @@ def check_plagiarism_in_folder(abs_folder_path: str) -> list[str, str, float]:
     return plagiarism_results
 
 if __name__ == "__main__":
-    abs_folder_path = "E:\Sarath\python\data"
+    abs_folder_path = "E:\Sarath\python\Plagarism_cheker\data"
     # try: 
     for data in check_plagiarism_in_folder(abs_folder_path):
-        print(data)
+        print("data", data)
     # except ValueError: # i.e empty folder (or) no files with the given extension
     #     print("Here ... ")
