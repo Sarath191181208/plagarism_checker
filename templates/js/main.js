@@ -52,6 +52,7 @@ function createView() {
 async function test() {
     alert("Choose a file in the selection menu to select the entire folder.")
     $("#loading-container").addClass("show");
+    $("#loading-container")[0].scrollIntoView();
     eel.selectFolder()(absPath => {
         eel.uploadFolder(absPath)(data => {
             if (!isValidData(data)) {
@@ -67,20 +68,5 @@ async function test() {
     });
 }
 
-let data = [
-    ["thisfilelong file file l.txt", "thisfile2.txt", "45"],
-    ["thisfilel_something_htis_skd.txt", "thisfile2_something_this_skd.txt", "45"],
-    ["thisfilel_something_htis_skd.txt", "thisfile2_something_this_skd.txt", "45"],
-    ["thisfilelsdlkjsljflksjlkjlsdkj_something_htis_skd.txt", "thisfile2_ssjlkdjsljsomething_this_skd.txt", "45"],
-    ["thisfilel_something_htis_skd.txt", "thisfile2_something_this_skd.txt", "45"],
-    ["thisfilel_something_htis_skd.txt", "thisfile2_something_this_skd.txt", "45"],
-    ["thisfilel_something_htis_skd.txt", "thisfile2_something_this_skd.txt", "45"],
-    ["thisfilel_something_htis_skd.txt", "thisfile2_something_this_skd.txt", "45"],
-    ["thisfilel_something_htis_skd.txt", "thisfile2_something_this_skd.txt", "45"],
-]
-globalData = data;
-let container = $("#view-data-center")
-// createProgressBars(data, container);
-createView();
 displayToggleViewButton();
 // displayToggleViewButton();
