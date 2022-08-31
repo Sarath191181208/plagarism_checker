@@ -3,15 +3,26 @@
   margin: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  cursor: default;
 }
 
 :root {
   --primary-color: #2e7eed;
 }
 
-.center {
+#view-data-center {
   display: grid;
   place-items: center;
+}
+
+@keyframes grow {
+	0% {
+		opacity: 0;
+	}
+	
+	100% {
+    opacity: 1;
+	}
 }
 
 /* width */

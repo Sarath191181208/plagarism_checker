@@ -1,14 +1,11 @@
-function createTable(res) {
+function createTable(res, root_container) {
+    let stuTable = $(`<table id="student-match-score-table" class="styled-table"></table>`)
+    root_container.append(stuTable);
 
-    if (res === null) {
-        alert("No valid data found In the given folder !")
-        return;
-    }
-
-    let stuTable = document.getElementById("student-match-score-table");
+    // let stuTable = document.getElementById("student-match-score-table");
     stuTable.innerHTML = "";
     let h = tableHeader("File Name", "File Name", "Match Score");
-    stuTable.appendChild(h);
+    stuTable.append(h);
 
     let tableBody = document.createElement('tbody');
     res.forEach(ele => {
@@ -22,8 +19,8 @@ function createTable(res) {
         );
     });
 
-    stuTable.appendChild(tableBody);
-    stuTable.scrollIntoView({
+    stuTable.append(tableBody);
+    stuTable[0].scrollIntoView({
         behavior: 'smooth'
     });
 

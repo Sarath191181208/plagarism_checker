@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css?family=Audiowide");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans");
+
+.progress-txt-container {
+  display: flex;
+  flex-direction: column;
+  word-break: break-all;
+}
+
+.indiv-progress-bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: 0.5s;
+}
+
+.indiv-progress-bar-container:hover {
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+#progress-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  padding: 20px;
+  gap: 15px;
+}
+
+.percentage-val {
+  font-family: "Open Sans", sans-serif;
+}
+
+.text1,
+.text2 {
+  /* width: 120px; */
+  font-family: "Open Sans", sans-serif;
+  margin-bottom: 8px;
+  color: rgb(164, 164, 164);
+}

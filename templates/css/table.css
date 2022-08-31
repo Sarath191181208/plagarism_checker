@@ -1,3 +1,7 @@
+:root {
+  --border-radius: 6px;
+}
+
 .styled-table {
   border-collapse: collapse;
   margin: 25px 0;
@@ -5,6 +9,27 @@
   font-family: sans-serif;
   min-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-radius: var(--border-radius);
+  border-style: hidden; /* hide standard table (collapsed) border */
+}
+
+.styled-table tr{
+  transition: 0.5s;
+}
+
+.styled-table tr:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+/* top-left border-radius */
+.styled-table tr:first-child th:first-child {
+  border-top-left-radius: var(--border-radius);
+}
+
+/* top-right border-radius */
+.styled-table tr:first-child th:last-child {
+  border-top-right-radius: var(--border-radius);
 }
 
 .styled-table thead tr {
@@ -15,7 +40,7 @@
 
 .styled-table th,
 .styled-table td {
-  padding: 12px 15px;
+  padding: 15px 15px;
 }
 
 .styled-table tbody tr {
@@ -26,11 +51,7 @@
   background-color: #f3f3f3;
 }
 
+/*
 .styled-table tbody tr:last-of-type {
   border-bottom: 2px solid var(--primary-color);
-}
-
-.styled-table tbody tr.active-row {
-  font-weight: bold;
-  color: var(--primary-color);
-}
+} */
