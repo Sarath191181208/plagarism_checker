@@ -19,9 +19,14 @@ def selectFolder() -> str:
     root = tkinter.Tk()
     root.attributes("-topmost", True)
     root.withdraw()
+    directory_path = None
     # directory_path  = filedialog.askdirectory();
-    file_path = filedialog.askopenfilename(title="Choose a file to process whole folder")
-    directory_path = os.path.dirname(file_path)
+    try: 
+        file_path = filedialog.askopenfilename(title="Choose a file to process whole folder")
+        directory_path = os.path.dirname(file_path)
+    except:
+        pass
+    print(directory_path)
     return directory_path
 
 def sort_mat(confusion_matrix: list[str, str, float]) -> list[str, str, list]:
@@ -37,7 +42,11 @@ def uploadFolder(file_name: str):
         return data
     except ValueError as e: # i.e empty folder (or) no files with the given extension
         traceback.print_exc()
-        logging.exception("Some error Occured")
+        logging.exception("Empty folder")
+        return None
+    except Exception as e:
+        traceback.print_exc()
+        logging.exception("Some exception occured")
         return None
 
 # 1000 is width of window and 600 is the height

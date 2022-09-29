@@ -83,7 +83,7 @@
   },
   {
    "optionDest": "hiddenimports",
-   "value": "textract"
+   "value": "PyPDF2"
   },
   {
    "optionDest": "pathex",

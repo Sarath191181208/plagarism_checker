@@ -54,6 +54,7 @@ async function test() {
     $("#loading-container").addClass("show");
     $("#loading-container")[0].scrollIntoView();
     eel.selectFolder()(absPath => {
+        console.log(absPath);
         eel.uploadFolder(absPath)(data => {
             if (!isValidData(data)) {
                 alert("No valid data found In the given folder !")
@@ -64,8 +65,10 @@ async function test() {
             createView(); // creating the view to view the data from globalData
             $("#loading-container").removeClass("show");
         });
-
     });
+
+    // $("#loading-container").removeClass("show");
+
 }
 
 displayToggleViewButton();
