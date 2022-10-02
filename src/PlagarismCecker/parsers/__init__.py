@@ -7,8 +7,8 @@ from typing import Callable
 
 def get_parser(file_name: str) -> Callable[str, str]:
     """returns the parser for the given file"""
-    extension = extension.removeprefix('.')
-    fn: callable
+    extension = file_name.removeprefix('.')
+    fn: Callable
     if extension == "txt":
         fn = TxtParser().parse
     elif extension == "pdf":
