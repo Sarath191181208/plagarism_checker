@@ -4,26 +4,11 @@ import numpy as np
 from pathlib import Path
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from typing import  Callable, Union
+from typing import Union
 
-from .parsers import TxtParser
-from .parsers import PdfParser
+from .parsers import get_parser
 
 import logging
-
-def get_file_parser(extension: str) -> Callable[ str, str]:
-    """returns a function to read a file the function takes the absolute path of a file and returns text"""
-    extension = extension.removeprefix('.')
-    fn: callable
-    if extension == "txt":
-        fn = TxtParser().parse
-    elif extension == "pdf":
-        fn = PdfParser().parse
-    else:
-        msg = f"The current given {extension= } doesn't have the neccesary parser implemented"
-        logging.exception(msg)
-        raise Exception(msg)
-    return fn
 
 def vectorize(txt: str)-> np.ndarray: return TfidfVectorizer().fit_transform(txt).toarray() # text to vectors
 def similarity(doc1: str, doc2: str) -> float: return cosine_similarity([doc1, doc2]) # similarity between files range(0-1)
@@ -33,7 +18,7 @@ def check_plagiarism_in_folder(abs_folder_path: str) -> list[str, str, float]:
     def _generate_parser_and_read(abs_file_path: str) -> Union[str, None]:
         ext = Path(abs_file_path).suffix
         try: 
-            return get_file_parser(ext)(abs_file_path)
+            return get_parser(ext)(abs_file_path)
         except:
             traceback.print_exc()
             logging.exception(f"Parsing the file failded {abs_file_path= }")
