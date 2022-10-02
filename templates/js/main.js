@@ -3,7 +3,7 @@ let globalData = null;
 
 const views = {
     "Table": 1,
-    "ProgressBar":2
+    "ProgressBar": 2
 }
 let view = views.ProgressBar;
 
@@ -53,21 +53,24 @@ async function test() {
     alert("Choose a file in the selection menu to select the entire folder.")
     $("#loading-container").addClass("show");
     $("#loading-container")[0].scrollIntoView();
-    eel.selectFolder()(absPath => {
-        console.log(absPath);
-        eel.uploadFolder(absPath)(data => {
-            if (!isValidData(data)) {
-                alert("No valid data found In the given folder !")
-                $("#loading-container").removeClass("show");
-                return;
-            }
-            globalData = data;
-            createView(); // creating the view to view the data from globalData
-            $("#loading-container").removeClass("show");
-        });
-    });
 
-    // $("#loading-container").removeClass("show");
+    try {
+        let absPath = await eel.selectFolder()();
+        console.log(absPath);
+        let data = await eel.uploadFolder(absPath)();
+        console.log(data);
+        
+        if (!isValidData(data)) {
+            alert("No valid data found In the given folder !")
+            throw  new Error("No valid data found In the given folder !")
+        }
+        globalData = data;
+        createView(); // creating the view to view the data from globalData
+    }
+    finally {
+        $("#loading-container").removeClass("show");
+    }
+
 
 }
 

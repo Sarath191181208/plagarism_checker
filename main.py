@@ -34,10 +34,10 @@ def sort_mat(confusion_matrix: list[str, str, float]) -> list[str, str, list]:
     return cm  
 
 @eel.expose
-def uploadFolder(file_name: str):
-    logging.info(file_name)
+def uploadFolder(folder_path: str):
+    logging.info("folder_path: ",folder_path)
     try: 
-        data =  list(check_plagiarism_in_folder(file_name))
+        data =  list(check_plagiarism_in_folder(folder_path))
         data = sort_mat(data)
         return data
     except ValueError as e: # i.e empty folder (or) no files with the given extension
