@@ -30,8 +30,8 @@ def selectFolder() -> str:
     return directory_path
 
 def sort_mat(confusion_matrix: list[str, str, float]) -> list[str, str, list]:
-    cm = sorted( confusion_matrix, key= lambda x : x[2], reverse=True)
-    return cm  
+    _cm = sorted( confusion_matrix, key= lambda x : x[2], reverse=True)
+    return _cm  
 
 @eel.expose
 def uploadFolder(folder_path: str):

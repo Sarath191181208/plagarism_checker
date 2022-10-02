@@ -16,7 +16,6 @@ function toggleView() {
     if (view === views.Table) view = views.ProgressBar
     else if (view === views.ProgressBar) view = views.Table
 
-    displayToggleViewButton(); // to change the icon of the button
     createView(); // to react to change the state
 }
 
@@ -36,6 +35,8 @@ function displayToggleViewButton() {
 function createView() {
     if (!isValidData(globalData)) return;
 
+    displayToggleViewButton(); // to change the icon of the button
+    
     let container = $("#view-data-center")
     container.fadeOut(20);
     container.empty() // clearing the whole container
@@ -59,7 +60,7 @@ async function test() {
         console.log(absPath);
         let data = await eel.uploadFolder(absPath)();
         console.log(data);
-        
+
         if (!isValidData(data)) {
             alert("No valid data found In the given folder !")
             throw  new Error("No valid data found In the given folder !")
@@ -73,6 +74,3 @@ async function test() {
 
 
 }
-
-displayToggleViewButton();
-// displayToggleViewButton();
