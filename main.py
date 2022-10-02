@@ -4,7 +4,7 @@ import tkinter
 import tkinter.filedialog as filedialog
 import traceback
 import eel
-from src.PlagarismCecker import check_plagiarism_in_folder
+from src import check_plagiarism_in_folder
 
 import logging
 logging.basicConfig(filename='logs.log', 
