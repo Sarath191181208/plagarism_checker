@@ -1,5 +1,4 @@
 import logging
-from .base_class import BaseParser
 from .text_parser import TxtParser
 from .pdf_parser import PdfParser
 
