@@ -1,5 +1,4 @@
 from typing import Union
-import logging
 import os
 import re
 import tkinter
@@ -9,16 +8,9 @@ from typing import List, Tuple
 import eel
 from src import check_plagiarism_in_folder
 
-import logging
-
 from src.parser_generator import _generate_parser_and_read
 from src.parsers.HTML_parser import HTMLParser
 from src.plagarism_checker import compare_files
-
-logging.basicConfig(filename='logs.log', 
-    level=logging.DEBUG, 
-    format='%(asctime)s %(message)s', 
-    datefmt='%m/%d/%Y %I:%M:%S %p')
 
 eel.init('templates', js_result_timeout=5*60*60)
 
@@ -33,8 +25,8 @@ def selectFolder() -> str:
         file_path = filedialog.askopenfilename(title="Choose a file to process whole folder")
         directory_path = os.path.dirname(file_path)
     except Exception as e:
-        logging.error(e)
-        logging.error(traceback.format_exc())
+        print(e)
+        print(traceback.format_exc())
     print(directory_path)
     return directory_path
 
@@ -47,8 +39,8 @@ def selectFile() -> str:
     try:
         file_path = filedialog.askopenfilename(title="Choose a file to process")
     except Exception as e:
-        logging.error(e)
-        logging.error(traceback.format_exc())
+        print(e)
+        print(traceback.format_exc())
     print(file_path)
     return file_path
 
@@ -101,18 +93,17 @@ def sort_mat(confusion_matrix: list[str, str, float]) -> list[str, str, float]:
 
 @eel.expose
 def uploadFolder(folder_path: str):
-    logging.info("folder_path: ",folder_path)
     try: 
         data =  list(check_plagiarism_in_folder(folder_path))
         data = sort_mat(data)
         return data
     except ValueError as e: # i.e empty folder (or) no files with the given extension
+        print(e)
         traceback.print_exc()
-        logging.exception("Empty folder")
         return None
     except Exception as e:
         traceback.print_exc()
-        logging.exception("Some exception occured")
+        print("Some exception occured")
         return None
 
 # 1000 is width of window and 600 is the height

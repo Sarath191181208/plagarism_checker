@@ -29,7 +29,8 @@ def check_plagiarism_in_folder(abs_folder_path: str) -> list[str, str, float]:
 
     logging.debug(f"{abs_folder_path= }")
     logging.debug(f"turnicated user_notes = {[note[:20] for note in user_notes]}")
-
+    print(user_notes)
+    print(len(user_notes))
     return compare_files(user_notes, user_files)
 
 def compare_files(user_notes: list[str], user_files: list[str]) -> list[Tuple[str, str, float]]:

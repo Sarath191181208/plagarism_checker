@@ -1,9 +1,9 @@
 PyPDF2==2.10.4
 eel==0.14.0
 scikit-learn==1.1.2
-docx2txt==0.8
 pandas==1.5.1
 python-pptx==0.6.21
+python-docx 
 BeautifulSoup4
 requests
 google

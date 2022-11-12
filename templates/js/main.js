@@ -9,7 +9,7 @@ const views = {
 let view = views.ProgressBar;
 
 function isValidData(data) {
-    return !(data === null || data.length < 2)
+    return !(data === null || data.length < 1)
 }
 
 function toggleView() {
