@@ -34,11 +34,11 @@ function displayToggleViewButton() {
 }
 
 var colors = [
-    "203, 76, 78",     // #CB4C4E
-    "255, 179, 153",   // #FFB399
+    // "203, 76, 78",     // #CB4C4E
+    // "255, 179, 153",   // #FFB399
     "59, 112, 159",    // #3B719F
-    "150, 210, 148",   // #96D294
-    "133, 176, 193",   // #85B0C1
+    // "150, 210, 148",   // #96D294
+    // "133, 176, 193",   // #85B0C1
 ]
 
 var colorIndex = 0;
@@ -53,7 +53,8 @@ function singlePage(query_text, url, matchScore) {
     return $(`
     <mark
         class="show-hover-text"
-        style="background-color: rgba(${color}) !important;color: black;"
+        style="background-color: rgba(${color}) !important;color: black;border-radius: 20px;
+        line-height: 1.8;"
         hover-text="${url}"
         >
         ${query_text}
