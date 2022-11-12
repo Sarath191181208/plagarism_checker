@@ -1,0 +1,1 @@
+- text in picture is not readable in pdf's
