@@ -51,26 +51,41 @@ function singlePage(query_text, url, matchScore) {
     var color = `${colors[colorIndex]}, ${(matchScore / 100) * 0.75}`;
     console.log(color);
     return $(`
-    <mark
-        class="show-hover-text"
-        style="background-color: rgba(${color}) !important;color: black;border-radius: 20px;
-        line-height: 1.8;"
-        hover-text="${url}"
-        >
-        ${query_text}
-    </mark>
+    <a  href="${url}">
+        <mark
+            class="show-hover-text"
+            style="background-color: rgba(${color}) !important;color: black;border-radius: 20px;
+            line-height: 1.8;"
+            hover-text="${url}"
+            >
+            ${query_text}
+        </mark>
+    </a>
     <span> </span>
     `);
 }
 
 
 function createSinglePage(data, root_container) {
-    let singlePageContainer = $(`<p id="single-page-container"></p>`);
-    root_container.append(singlePageContainer)
+    let singlePageContainer = $(`<div id="single-page-container"></div>`);
+    let urlScoreTable = $(`<table id="url-score-table" class="styled-table"></table>`);
+    root_container.append(urlScoreTable);
+    root_container.append(singlePageContainer);
     singlePageContainer.innerHTML = "";
 
+    // merge similar url data
+    let h = tableHeader("URL", "Match Score");
+    urlScoreTable.append(h);
+
     data.forEach(ele => {
-        console.log(ele);
+        const [query_text, url, matchScore] = ele;
+        urlScoreTable.append(tr(
+            td($(`<a href="${url}">${url}</a>`)[0]),
+            td(matchScore)
+        ));
+    })
+
+    data.forEach(ele => {
         const [query_text, url, matchScore] = ele;
         //create a simple text viewver 
         singlePageContainer.append(singlePage(query_text, url, matchScore));

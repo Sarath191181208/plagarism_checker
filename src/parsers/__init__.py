@@ -4,6 +4,7 @@ from .pdf_parser import PdfParser
 from .excel_parser import ExcelParser
 from .ppt_parser import PptParser
 from .doc_parser import WordParser
+from .HTML_parser import HTMLParser
 
 from typing import Callable
 
@@ -16,12 +17,14 @@ def get_parser(file_name: str) -> Callable[str, str]:
         fn = TxtParser().parse
     elif extension == "pdf":
         fn = PdfParser().parse
-    elif extension == "docx":
+    elif extension == "docx" or extension == "doc":
         fn = WordParser().parse
     elif extension == "pptx":
         fn = PptParser().parse
     elif extension == "xlsx":
         fn = ExcelParser().parse
+    elif extension == "html":
+        fn = HTMLParser().parse
     else:
         msg = f"The current given {extension= } doesn't have the neccesary parser implemented"
         logging.exception(msg)
