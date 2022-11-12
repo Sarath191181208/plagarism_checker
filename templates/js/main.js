@@ -60,10 +60,16 @@ async function UploadFile() {
         let data = await eel.parseFileAndSearch(absPath)();
         console.log(data);
 
-        if (!isValidData(data)) {
+        if (data == null) {
             alert("No valid data found In the given file !")
             throw new Error("No valid data found In the given file !")
         }
+
+        // TODO:
+        // - check the data on the internet using google
+        // - cache the data in the local storage
+        // - display the data in the table
+
     }
     finally {
         $("#loading-container").removeClass("show");

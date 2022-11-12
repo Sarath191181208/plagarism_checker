@@ -1,3 +1,4 @@
+from ctypes import Union
 import logging
 import os
 import tkinter
@@ -7,6 +8,9 @@ import eel
 from src import check_plagiarism_in_folder
 
 import logging
+
+from src.parser_generator import _generate_parser_and_read
+
 logging.basicConfig(filename='logs.log', 
     level=logging.DEBUG, 
     format='%(asctime)s %(message)s', 
@@ -46,6 +50,9 @@ def selectFile() -> str:
 
 @eel.expose
 def parseFileAndSearch(file_path: str) -> str:
+    text: Union[str, None] =  _generate_parser_and_read(file_path)
+    if text is None:
+        return None
     return file_path
 
 def sort_mat(confusion_matrix: list[str, str, float]) -> list[str, str, list]:
