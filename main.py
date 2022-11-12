@@ -1,9 +1,11 @@
 from ctypes import Union
 import logging
 import os
+import re
 import tkinter
 import tkinter.filedialog as filedialog
 import traceback
+from typing import List, Tuple
 import eel
 from src import check_plagiarism_in_folder
 
@@ -16,7 +18,7 @@ logging.basicConfig(filename='logs.log',
     format='%(asctime)s %(message)s', 
     datefmt='%m/%d/%Y %I:%M:%S %p')
 
-eel.init('templates')
+eel.init('templates', js_result_timeout=5*60*60)
 
 @eel.expose
 def selectFolder() -> str:
@@ -48,14 +50,27 @@ def selectFile() -> str:
     print(file_path)
     return file_path
 
-@eel.expose
-def parseFileAndSearch(file_path: str) -> str:
-    text: Union[str, None] =  _generate_parser_and_read(file_path)
-    if text is None:
-        return None
-    return file_path
+def search_chunk_on_web(chunk: str) -> list[str, str, float]:
+    from googlesearch import search
 
-def sort_mat(confusion_matrix: list[str, str, float]) -> list[str, str, list]:
+    # to search
+    query = str(chunk)
+    for search_url in search(query, tld="co.in", num=2, stop=1, pause=0.2):
+        # TODO: get the similarity score from the search result and take the max score
+        print(search_url)
+    return [chunk, search_url, 0.0]
+
+
+@eel.expose
+def parseFileAndSearch(file_path: str) -> List[Tuple[str, str, float]]:
+    text: Union[str, None] =  _generate_parser_and_read(file_path)
+    if text is None: return None
+    text_chunks: List[str] = re.split(r'[\s.,;:!? ]+', text)
+    text_chunks = [" ".join(text_chunks[i:i+32]) for i in range(0, len(text_chunks), 32)]
+    res_obj = [search_chunk_on_web(chunk) for chunk in text_chunks]
+    return res_obj
+
+def sort_mat(confusion_matrix: list[str, str, float]) -> list[str, str, float]:
     _cm = sorted( confusion_matrix, key= lambda x : x[2], reverse=True)
     return _cm  
 
