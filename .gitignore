@@ -4,6 +4,7 @@ output/
 data/
 plag_check_venv/
 test/
+.google-cookie
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

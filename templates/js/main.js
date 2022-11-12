@@ -36,7 +36,7 @@ function createView() {
     if (!isValidData(globalData)) return;
 
     displayToggleViewButton(); // to change the icon of the button
-    
+
     let container = $("#view-data-center")
     container.fadeOut(20);
     container.empty() // clearing the whole container
@@ -50,7 +50,33 @@ function createView() {
     container.fadeIn();
 }
 
-async function test() {
+async function UploadFile() {
+    $("#loading-container").addClass("show");
+    $("#loading-container")[0].scrollIntoView();
+
+    try {
+        let absPath = await eel.selectFile()();
+        console.log(absPath);
+        let data = await eel.parseFileAndSearch(absPath)();
+        console.log(data);
+
+        if (data == null) {
+            alert("No valid data found In the given file !")
+            throw new Error("No valid data found In the given file !")
+        }
+
+        // TODO:
+        // - check the data on the internet using google
+        // - cache the data in the local storage
+        // - display the data in the table
+
+    }
+    finally {
+        $("#loading-container").removeClass("show");
+    }
+}
+
+async function UploadFolder() {
     alert("Choose a file in the selection menu to select the entire folder.")
     $("#loading-container").addClass("show");
     $("#loading-container")[0].scrollIntoView();
@@ -63,7 +89,7 @@ async function test() {
 
         if (!isValidData(data)) {
             alert("No valid data found In the given folder !")
-            throw  new Error("No valid data found In the given folder !")
+            throw new Error("No valid data found In the given folder !")
         }
         globalData = data;
         createView(); // creating the view to view the data from globalData
