@@ -3,7 +3,8 @@ let globalData = null;
 
 const views = {
     "Table": 1,
-    "ProgressBar": 2
+    "ProgressBar": 2,
+    "SinglePage": 3
 }
 let view = views.ProgressBar;
 
@@ -32,6 +33,53 @@ function displayToggleViewButton() {
     toggleViewBtn.children().attr('src', getImgAttr())
 }
 
+var colors = [
+    "203, 76, 78",     // #CB4C4E
+    "255, 179, 153",   // #FFB399
+    "59, 112, 159",    // #3B719F
+    "150, 210, 148",   // #96D294
+    "133, 176, 193",   // #85B0C1
+]
+
+var colorIndex = 0;
+
+function singlePage(query_text, url, matchScore) {
+    // create a text span with opactiy equal to matchScore and on hover show the url
+    colorIndex += 1;
+    colorIndex %= colors.length;
+
+    var color = `${colors[colorIndex]}, ${(matchScore / 100) * 0.75}`;
+    console.log(color);
+    return $(`
+    <mark
+        class="show-hover-text"
+        style="background-color: rgba(${color}) !important;color: black;"
+        hover-text="${url}"
+        >
+        ${query_text}
+    </mark>
+    <span> </span>
+    `);
+}
+
+
+function createSinglePage(data, root_container) {
+    let singlePageContainer = $(`<p id="single-page-container"></p>`);
+    root_container.append(singlePageContainer)
+    singlePageContainer.innerHTML = "";
+
+    data.forEach(ele => {
+        console.log(ele);
+        const [query_text, url, matchScore] = ele;
+        //create a simple text viewver 
+        singlePageContainer.append(singlePage(query_text, url, matchScore));
+    });
+
+    singlePageContainer[0].scrollIntoView({
+        behavior: 'smooth'
+    });
+}
+
 function createView() {
     if (!isValidData(globalData)) return;
 
@@ -44,8 +92,11 @@ function createView() {
     if (view == views.Table) {
         createTable(globalData, container);
     }
-    else {
+    else if (view == views.ProgressBar) {
         createProgressBars(globalData, container);
+    }
+    else if (view == views.SinglePage) {
+        createSinglePage(globalData, container);
     }
     container.fadeIn();
 }
@@ -64,11 +115,9 @@ async function UploadFile() {
             alert("No valid data found In the given file !")
             throw new Error("No valid data found In the given file !")
         }
-
-        // TODO:
-        // - check the data on the internet using google
-        // - cache the data in the local storage
-        // - display the data in the table
+        view = views.SinglePage;
+        globalData = data;
+        createView();
 
     }
     finally {
@@ -80,6 +129,7 @@ async function UploadFolder() {
     alert("Choose a file in the selection menu to select the entire folder.")
     $("#loading-container").addClass("show");
     $("#loading-container")[0].scrollIntoView();
+    view = views.ProgressBar;
 
     try {
         let absPath = await eel.selectFolder()();

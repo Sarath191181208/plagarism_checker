@@ -1,2 +1,3 @@
 - text in picture is not readable in pdf's
 - check the logging error later ...
+- cache the results.
