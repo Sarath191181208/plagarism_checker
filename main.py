@@ -1,4 +1,4 @@
-from ctypes import Union
+from typing import Union
 import logging
 import os
 import re
@@ -12,6 +12,8 @@ from src import check_plagiarism_in_folder
 import logging
 
 from src.parser_generator import _generate_parser_and_read
+from src.parsers.HTML_parser import HTMLParser
+from src.plagarism_checker import compare_files
 
 logging.basicConfig(filename='logs.log', 
     level=logging.DEBUG, 
@@ -53,13 +55,36 @@ def selectFile() -> str:
 def search_chunk_on_web(chunk: str) -> list[str, str, float]:
     from googlesearch import search
 
-    # to search
     query = str(chunk)
-    for search_url in search(query, tld="co.in", num=2, stop=1, pause=0.2):
-        # TODO: get the similarity score from the search result and take the max score
-        print(search_url)
-    return [chunk, search_url, 100.0]
+    url_list: list[str] = []
+    for search_url in search(query, tld="co.in", num=2, stop=2, pause=0.1):
+        url_list.append(search_url)
+        text_list = [get_text_from_url(url) for url in url_list]
 
+    # remove None from zipped list
+    zipped = list(zip(url_list, text_list))
+    zipped = [x for x in zipped if x[1] is not None]
+    url_list, text_list = zip(*zipped)
+
+
+    res_list = compare_files([*text_list, query], [*url_list, "query"])
+    res_list = [res for res in res_list if res[0] == "query" or res[1] == "query"]
+    res_list = sort_mat(res_list)
+
+    res = res_list[0]
+    res_1 = res[1] if res[1] != "query" else res[0]
+
+    return (query , res_1, res[2])
+
+def get_text_from_url(url: str) -> Union[str, None]:
+    import requests
+    try:
+        r = requests.get(url, timeout=5)
+        r.raise_for_status()
+        return HTMLParser.parse_html(  r.text )
+    except requests.exceptions.RequestException as err:
+        print ("Oops: Something Else",err)
+        return None
 
 @eel.expose
 def parseFileAndSearch(file_path: str) -> List[Tuple[str, str, float]]:
