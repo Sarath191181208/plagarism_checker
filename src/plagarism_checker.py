@@ -4,7 +4,7 @@ import numpy as np
 from pathlib import Path
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from typing import Union
+from typing import Tuple, Union
 
 from src.parser_generator import _generate_parser_and_read
 
@@ -30,6 +30,25 @@ def check_plagiarism_in_folder(abs_folder_path: str) -> list[str, str, float]:
     logging.debug(f"{abs_folder_path= }")
     logging.debug(f"turnicated user_notes = {[note[:20] for note in user_notes]}")
 
+    return compare_files(user_notes, user_files)
+
+def compare_files(user_notes: list[str], user_files: list[str]) -> list[Tuple[str, str, float]]:
+    """
+        compares the different files and scores the results 
+        Prameters:
+        ---
+        user_notes: list[str] -> [note1, note2, note3, ...]
+        user_files: list[str] -> [file_name, file_name, ...]
+
+        Returns:
+        ---
+        [
+            (file_name1, file_name2, score),
+            (file_name1, file_name3, score),
+        ]
+
+        returns a list of tuples (file1, file2, similarity_score)
+    """
     txt_vectors = vectorize(user_notes) # list[str] -> vectors
     s_vectors = list(zip(user_files, txt_vectors)) # merging filenames and vectors
     plagiarism_results = set()
@@ -44,8 +63,7 @@ def check_plagiarism_in_folder(abs_folder_path: str) -> list[str, str, float]:
             score = (student_pair[0], student_pair[1], int(sim_score*100))
             plagiarism_results.add(score)
 
-    return plagiarism_results
-
+    return sorted(plagiarism_results, key= lambda x : x[2], reverse=True)  # sort results on score  
 if __name__ == "__main__":
     abs_folder_path = "E:\Sarath\python\Plagarism_cheker\data/pdf"
     # try: 
