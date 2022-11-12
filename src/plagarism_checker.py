@@ -6,6 +6,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from typing import Union
 
+from src.parser_generator import _generate_parser_and_read
+
 from .parsers import get_parser
 
 import logging
@@ -14,15 +16,6 @@ def vectorize(txt: str)-> np.ndarray: return TfidfVectorizer().fit_transform(txt
 def similarity(doc1: str, doc2: str) -> float: return cosine_similarity([doc1, doc2]) # similarity between files range(0-1)
 
 def check_plagiarism_in_folder(abs_folder_path: str) -> list[str, str, float]:
-
-    def _generate_parser_and_read(abs_file_path: str) -> Union[str, None]:
-        ext = Path(abs_file_path).suffix
-        try: 
-            return get_parser(ext)(abs_file_path)
-        except:
-            traceback.print_exc()
-            logging.exception(f"Parsing the file failded {abs_file_path= }")
-            return None
 
     user_files = [doc for doc in os.listdir(abs_folder_path) if not os.path.isdir(doc)]      # getting all the files 
     
