@@ -1,11 +1,10 @@
-from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from .base_class import BaseParser
 class WordParser(BaseParser):
     @staticmethod
     def parse(abs_file_name: str) -> str:
         with open(abs_file_name, mode='rb') as f:
-            html = urlopen(f).read()
+            
             soup = BeautifulSoup(html, features="html.parser")
 
             for script in soup(["script", "style"]):
