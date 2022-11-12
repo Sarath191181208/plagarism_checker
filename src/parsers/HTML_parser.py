@@ -1,10 +1,10 @@
 from bs4 import BeautifulSoup
 from .base_class import BaseParser
-class WordParser(BaseParser):
+class HTMLParser(BaseParser):
     @staticmethod
     def parse(abs_file_name: str) -> str:
         with open(abs_file_name, mode='rb') as f:
-            return WordParser.parse_html(BeautifulSoup(f, 'html.parser'))
+            return HTMLParser.parse_html(BeautifulSoup(f, 'html.parser'))
 
     @staticmethod
     def parse_html(html_content: str)  -> str:
