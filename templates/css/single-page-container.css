@@ -1,0 +1,10 @@
+#single-page-container {
+  background-color: #fff;
+  padding: 5px;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  text-overflow: clip;
+  -webkit-overflow-scrolling: touch;
+  word-break: break-all;
+}

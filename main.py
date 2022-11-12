@@ -58,7 +58,7 @@ def search_chunk_on_web(chunk: str) -> list[str, str, float]:
     for search_url in search(query, tld="co.in", num=2, stop=1, pause=0.2):
         # TODO: get the similarity score from the search result and take the max score
         print(search_url)
-    return [chunk, search_url, 0.0]
+    return [chunk, search_url, 100.0]
 
 
 @eel.expose
