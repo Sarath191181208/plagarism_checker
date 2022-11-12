@@ -12,7 +12,7 @@
   border-radius: 5px;
   padding: 5px 0;
   transition: opacity 0.2s ease-in-out;
-
+  min-width: 100px;
   position: absolute;
   z-index: 1;
   left: 0;
