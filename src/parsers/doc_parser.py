@@ -9,7 +9,6 @@ class WordParser(BaseParser):
              for para in wordreader:
                  fullText.append(para.text)
              return '\n'.join(fullText)
+ 
 
-if __name__ == "__main__":
-    WordParser.parse()
     
