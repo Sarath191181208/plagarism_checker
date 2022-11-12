@@ -24,8 +24,9 @@ def selectFolder() -> str:
     try: 
         file_path = filedialog.askopenfilename(title="Choose a file to process whole folder")
         directory_path = os.path.dirname(file_path)
-    except:
-        pass
+    except Exception as e:
+        logging.error(e)
+        logging.error(traceback.format_exc())
     print(directory_path)
     return directory_path
 
