@@ -30,6 +30,24 @@ def selectFolder() -> str:
     print(directory_path)
     return directory_path
 
+@eel.expose
+def selectFile() -> str:
+    root = tkinter.Tk()
+    root.attributes("-topmost", True)
+    root.withdraw()
+    file_path = None
+    try:
+        file_path = filedialog.askopenfilename(title="Choose a file to process")
+    except Exception as e:
+        logging.error(e)
+        logging.error(traceback.format_exc())
+    print(file_path)
+    return file_path
+
+@eel.expose
+def parseFileAndSearch(file_path: str) -> str:
+    return file_path
+
 def sort_mat(confusion_matrix: list[str, str, float]) -> list[str, str, list]:
     _cm = sorted( confusion_matrix, key= lambda x : x[2], reverse=True)
     return _cm  
