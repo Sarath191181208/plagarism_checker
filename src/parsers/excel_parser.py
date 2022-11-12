@@ -8,8 +8,7 @@ class ExcelParser(BaseParser):
            excelreader=pd.read_excel(f)
         return(excelreader)
 
-if __name__ == "__main__":
-    ExcelParser.parse()
+
 
 
            
