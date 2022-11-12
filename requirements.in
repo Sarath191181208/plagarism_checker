@@ -6,3 +6,4 @@ pandas==1.5.1
 python-pptx
 BeautifulSoup4
 aiohttp
+google
