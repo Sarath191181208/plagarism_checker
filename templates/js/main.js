@@ -56,7 +56,6 @@ function singlePage(query_text, url, matchScore) {
             class="show-hover-text"
             style="background-color: rgba(${color}) !important;color: black;border-radius: 20px;
             line-height: 1.8;"
-            hover-text="${url}"
             >
             ${query_text}
         </mark>
@@ -163,6 +162,14 @@ async function UploadFolder() {
     finally {
         $("#loading-container").removeClass("show");
     }
-
-
 }
+
+globalData = [
+    ["hello this is some random stuff be  sure to read this random stuff this random stuff", "https://www.google.com", 100],
+    ["hello this is some random stuff be  sure to read this random stuff this random stuff", "https://www.google.com", 100],
+    ["hello this is some random stuff be  sure to read this random stuff this random stuff", "https://www.google.com", 100],
+    ["hello this is some random stuff be  sure to read this random stuff this random stuff", "https://www.google.com", 100],
+]
+
+view = views.SinglePage;
+createView();
