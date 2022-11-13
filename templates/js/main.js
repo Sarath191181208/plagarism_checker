@@ -56,6 +56,7 @@ function singlePage(query_text, url, matchScore) {
             class="show-hover-text"
             style="background-color: rgba(${color}) !important;color: black;border-radius: 20px;
             line-height: 1.8;"
+            hover-text="${matchScore}"
             >
             ${query_text}
         </mark>
