@@ -164,13 +164,3 @@ async function UploadFolder() {
         $("#loading-container").removeClass("show");
     }
 }
-
-globalData = [
-    ["hello this is some random stuff be  sure to read this random stuff this random stuff", "https://www.google.com", 100],
-    ["hello this is some random stuff be  sure to read this random stuff this random stuff", "https://www.google.com", 100],
-    ["hello this is some random stuff be  sure to read this random stuff this random stuff", "https://www.google.com", 100],
-    ["hello this is some random stuff be  sure to read this random stuff this random stuff", "https://www.google.com", 100],
-]
-
-view = views.SinglePage;
-createView();
