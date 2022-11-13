@@ -1,6 +1,7 @@
 .btn-main-md {
   padding: 17px 38px;
   border-radius: 8px;
+  width: 200px;
   background: #fff;
   color: var(--primary-color);
   border-color: var(--primary-color);
